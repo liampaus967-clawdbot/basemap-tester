@@ -605,25 +605,46 @@
       }
     },
     {
-      "id": "state-label",
+      "id": "state-label-abbr",
       "type": "symbol",
       "source": "composite",
       "source-layer": "place_label",
-      "minzoom": 3,
+      "minzoom": 4,
+      "maxzoom": 5.5,
+      "filter": ["==", ["get", "type"], "state"],
+      "layout": {
+        "text-field": ["get", "abbr"],
+        "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 4, 10, 5.5, 12],
+        "text-transform": "uppercase",
+        "text-letter-spacing": 0.05
+      },
+      "paint": {
+        "text-color": "#7a746c",
+        "text-halo-color": "#e8e4dc",
+        "text-halo-width": 1.5
+      }
+    },
+    {
+      "id": "state-label-full",
+      "type": "symbol",
+      "source": "composite",
+      "source-layer": "place_label",
+      "minzoom": 5.5,
       "maxzoom": 8,
       "filter": ["==", ["get", "type"], "state"],
       "layout": {
         "text-field": ["get", "name"],
         "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
-        "text-size": ["interpolate", ["linear"], ["zoom"], 3, 9, 7, 14],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 5.5, 12, 7, 16],
         "text-transform": "uppercase",
-        "text-letter-spacing": 0.12
+        "text-letter-spacing": 0.1
       },
       "paint": {
         "text-color": "#7a746c",
         "text-halo-color": "#e8e4dc",
         "text-halo-width": 1.5,
-        "text-opacity": ["interpolate", ["linear"], ["zoom"], 3, 1, 7, 0.5, 8, 0]
+        "text-opacity": ["interpolate", ["linear"], ["zoom"], 5.5, 1, 7.5, 0.6, 8, 0]
       }
     },
     {
@@ -632,19 +653,20 @@
       "source": "composite",
       "source-layer": "place_label",
       "minzoom": 1,
-      "maxzoom": 7,
+      "maxzoom": 8,
       "filter": ["==", ["get", "type"], "country"],
       "layout": {
         "text-field": ["get", "name"],
         "text-font": ["DIN Pro Bold", "Arial Unicode MS Bold"],
-        "text-size": ["interpolate", ["linear"], ["zoom"], 1, 10, 6, 18],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 1, 12, 4, 20, 7, 28],
         "text-transform": "uppercase",
-        "text-letter-spacing": 0.1
+        "text-letter-spacing": 0.15
       },
       "paint": {
-        "text-color": "#5a5450",
+        "text-color": "#6a645c",
         "text-halo-color": "#e8e4dc",
-        "text-halo-width": 2
+        "text-halo-width": 2,
+        "text-opacity": ["interpolate", ["linear"], ["zoom"], 1, 1, 7, 0.7, 8, 0]
       }
     }
   ]
