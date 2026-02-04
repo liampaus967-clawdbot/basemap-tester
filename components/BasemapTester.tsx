@@ -3,6 +3,7 @@ import Map, { NavigationControl } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import hydroLightStyle from "@/styles/hydro-light.json";
+import hydroDarkStyle from "@/styles/hydro-dark.json";
 import onxTopoLightStyle from "@/styles/onx-topo-light.json";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
@@ -27,6 +28,12 @@ const BASEMAP_STYLES: BasemapStyle[] = [
     name: "Hydro Light",
     icon: "💧",
     style: hydroLightStyle,
+  },
+  {
+    id: "hydro-dark",
+    name: "Hydro Dark",
+    icon: "🌊",
+    style: hydroDarkStyle, // Nighttime style with glowing water
   },
   {
     id: "topo-light",
