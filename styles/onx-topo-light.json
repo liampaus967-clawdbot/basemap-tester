@@ -544,11 +544,11 @@
       "minzoom": 10,
       "filter": ["match", ["get", "type"], ["village", "hamlet", "suburb", "neighbourhood"], true, false],
       "layout": {
-        "text-field": ["step", ["zoom"], ["concat", "○\n", ["get", "name"]], 13, ["get", "name"]],
+        "text-field": ["step", ["zoom"], ["concat", ["get", "name"], "\n○"], 13, ["get", "name"]],
         "text-font": ["DIN Pro Regular", "Arial Unicode MS Regular"],
         "text-size": ["interpolate", ["linear"], ["zoom"], 10, 11, 16, 14],
         "text-max-width": 8,
-        "text-anchor": "top",
+        "text-anchor": "bottom",
         "text-justify": "center"
       },
       "paint": {
@@ -565,11 +565,11 @@
       "minzoom": 8,
       "filter": ["==", ["get", "type"], "town"],
       "layout": {
-        "text-field": ["step", ["zoom"], ["concat", "○\n", ["get", "name"]], 11, ["get", "name"]],
+        "text-field": ["step", ["zoom"], ["concat", ["get", "name"], "\n○"], 11, ["get", "name"]],
         "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
         "text-size": ["interpolate", ["linear"], ["zoom"], 8, 11, 14, 15],
         "text-max-width": 8,
-        "text-anchor": "top",
+        "text-anchor": "bottom",
         "text-justify": "center"
       },
       "paint": {
@@ -607,11 +607,11 @@
       "minzoom": 5,
       "filter": ["all", ["==", ["get", "type"], "city"], ["!=", ["get", "capital"], 2], ["<", ["get", "symbolrank"], 13]],
       "layout": {
-        "text-field": ["step", ["zoom"], ["concat", "○\n", ["get", "name"]], 10, ["get", "name"]],
+        "text-field": ["step", ["zoom"], ["concat", ["get", "name"], "\n○"], 10, ["get", "name"]],
         "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
         "text-size": ["interpolate", ["linear"], ["zoom"], 5, 11, 14, 18],
         "text-max-width": 8,
-        "text-anchor": "top",
+        "text-anchor": "bottom",
         "text-justify": "center"
       },
       "paint": {
@@ -628,11 +628,11 @@
       "minzoom": 3,
       "filter": ["all", ["==", ["get", "type"], "city"], ["!=", ["get", "capital"], 2], [">=", ["get", "symbolrank"], 13]],
       "layout": {
-        "text-field": ["step", ["zoom"], ["concat", "○\n", ["get", "name"]], 8, ["get", "name"]],
+        "text-field": ["step", ["zoom"], ["concat", ["get", "name"], "\n○"], 8, ["get", "name"]],
         "text-font": ["DIN Pro Bold", "Arial Unicode MS Bold"],
         "text-size": ["interpolate", ["linear"], ["zoom"], 3, 12, 12, 22],
         "text-max-width": 8,
-        "text-anchor": "top",
+        "text-anchor": "bottom",
         "text-justify": "center"
       },
       "paint": {
