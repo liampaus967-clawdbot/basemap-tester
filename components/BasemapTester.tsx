@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Map, { NavigationControl } from "react-map-gl";
+import type { MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import hydroLightStyle from "@/styles/hydro-light.json";
 import onxTopoLightStyle from "@/styles/onx-topo-light.json";
@@ -58,6 +59,24 @@ const BasemapTester: React.FC = () => {
 
   const activeStyle = BASEMAP_STYLES.find((s) => s.id === activeStyleId);
 
+  // Enable 3D terrain when map loads
+  const onMapLoad = useCallback((event: { target: any }) => {
+    const map = event.target;
+    
+    // Add terrain source if not already present
+    if (!map.getSource('mapbox-dem')) {
+      map.addSource('mapbox-dem', {
+        type: 'raster-dem',
+        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+        tileSize: 512,
+        maxzoom: 14
+      });
+    }
+    
+    // Enable 3D terrain
+    map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
+  }, []);
+
   return (
     <div style={{ position: "relative", width: "100%", height: "100vh" }}>
       <Map
@@ -65,6 +84,7 @@ const BasemapTester: React.FC = () => {
         style={{ width: "100%", height: "100vh" }}
         mapStyle={activeStyle?.style as any}
         mapboxAccessToken={MAPBOX_TOKEN}
+        onLoad={onMapLoad}
       >
         <NavigationControl position="top-right" />
       </Map>
