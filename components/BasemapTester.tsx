@@ -14,6 +14,12 @@ interface BasemapStyle {
 
 const BASEMAP_STYLES: BasemapStyle[] = [
   {
+    id: "hydro-light",
+    name: "Hydro Light",
+    icon: "💧",
+    url: "mapbox://styles/onwaterllc/STYLE_ID_HERE", // Replace with uploaded style ID
+  },
+  {
     id: "topo-light",
     name: "Topo Light",
     icon: "🗺️",
