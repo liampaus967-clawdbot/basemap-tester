@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Map, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import hydroLightStyle from "@/styles/hydro-light.json";
+import onxTopoLightStyle from "@/styles/onx-topo-light.json";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
 
@@ -15,10 +16,16 @@ interface BasemapStyle {
 
 const BASEMAP_STYLES: BasemapStyle[] = [
   {
+    id: "onx-topo-light",
+    name: "onX Topo Light",
+    icon: "🏔️",
+    style: onxTopoLightStyle, // onX-style with contours in feet
+  },
+  {
     id: "hydro-light",
     name: "Hydro Light",
     icon: "💧",
-    style: hydroLightStyle, // Direct JSON object
+    style: hydroLightStyle,
   },
   {
     id: "topo-light",
@@ -42,12 +49,12 @@ const BASEMAP_STYLES: BasemapStyle[] = [
 
 const BasemapTester: React.FC = () => {
   const [viewport, setViewport] = useState({
-    latitude: 39.8283,
-    longitude: -98.5795,
-    zoom: 4,
+    latitude: 44.5,
+    longitude: -72.7,
+    zoom: 10,
   });
 
-  const [activeStyleId, setActiveStyleId] = useState<string>("topo-light");
+  const [activeStyleId, setActiveStyleId] = useState<string>("onx-topo-light");
 
   const activeStyle = BASEMAP_STYLES.find((s) => s.id === activeStyleId);
 
