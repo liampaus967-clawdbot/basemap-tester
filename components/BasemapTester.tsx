@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Map, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import hydroLightStyle from "@/styles/hydro-light.json";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
 
@@ -9,7 +10,7 @@ interface BasemapStyle {
   id: string;
   name: string;
   icon: string;
-  url: string;
+  style: string | object; // Can be URL string or style JSON object
 }
 
 const BASEMAP_STYLES: BasemapStyle[] = [
@@ -17,25 +18,25 @@ const BASEMAP_STYLES: BasemapStyle[] = [
     id: "hydro-light",
     name: "Hydro Light",
     icon: "💧",
-    url: "mapbox://styles/onwaterllc/STYLE_ID_HERE", // Replace with uploaded style ID
+    style: hydroLightStyle, // Direct JSON object
   },
   {
     id: "topo-light",
     name: "Topo Light",
     icon: "🗺️",
-    url: "mapbox://styles/mapbox/outdoors-v12",
+    style: "mapbox://styles/mapbox/outdoors-v12",
   },
   {
     id: "topo-dark",
     name: "Topo Dark",
     icon: "🌑",
-    url: "mapbox://styles/mapbox/dark-v11",
+    style: "mapbox://styles/mapbox/dark-v11",
   },
   {
     id: "satellite",
     name: "Satellite",
     icon: "🛰️",
-    url: "mapbox://styles/mapbox/satellite-streets-v12",
+    style: "mapbox://styles/mapbox/satellite-streets-v12",
   },
 ];
 
@@ -55,7 +56,7 @@ const BasemapTester: React.FC = () => {
       <Map
         initialViewState={viewport}
         style={{ width: "100%", height: "100vh" }}
-        mapStyle={activeStyle?.url}
+        mapStyle={activeStyle?.style as any}
         mapboxAccessToken={MAPBOX_TOKEN}
       >
         <NavigationControl position="top-right" />
@@ -81,8 +82,8 @@ const BasemapTester: React.FC = () => {
 
         {/* Current Style Info */}
         <div className="style-info">
-          <span>Current Style URL:</span>
-          <code>{activeStyle?.url}</code>
+          <span>Current Style:</span>
+          <code>{typeof activeStyle?.style === 'string' ? activeStyle.style : 'Local JSON (hydro-light.json)'}</code>
         </div>
       </div>
     </div>
