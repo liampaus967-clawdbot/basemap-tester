@@ -53,13 +53,15 @@ const BasemapTester: React.FC = () => {
     latitude: 44.5,
     longitude: -72.7,
     zoom: 10,
+    pitch: 45,
+    bearing: -10,
   });
 
   const [activeStyleId, setActiveStyleId] = useState<string>("onx-topo-light");
 
   const activeStyle = BASEMAP_STYLES.find((s) => s.id === activeStyleId);
 
-  // Enable 3D terrain when map loads
+  // Enable 3D terrain and hillshade when map loads
   const onMapLoad = useCallback((event: { target: any }) => {
     const map = event.target;
     
@@ -71,6 +73,33 @@ const BasemapTester: React.FC = () => {
         tileSize: 512,
         maxzoom: 14
       });
+    }
+    
+    // Add hillshade layer if not already present
+    if (!map.getLayer('hillshade')) {
+      // Find a good insertion point - before labels/symbols if possible
+      const layers = map.getStyle().layers;
+      let insertBefore: string | undefined;
+      for (const layer of layers) {
+        if (layer.type === 'symbol' || layer.id.includes('label')) {
+          insertBefore = layer.id;
+          break;
+        }
+      }
+      
+      map.addLayer({
+        id: 'hillshade',
+        type: 'hillshade',
+        source: 'mapbox-dem',
+        paint: {
+          'hillshade-illumination-direction': 315,
+          'hillshade-illumination-anchor': 'viewport',
+          'hillshade-exaggeration': 0.5,
+          'hillshade-shadow-color': '#000000',
+          'hillshade-highlight-color': '#ffffff',
+          'hillshade-accent-color': '#000000',
+        }
+      }, insertBefore);
     }
     
     // Enable 3D terrain
