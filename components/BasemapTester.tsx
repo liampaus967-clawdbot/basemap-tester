@@ -2,8 +2,6 @@ import React, { useState, useCallback } from "react";
 import Map, { NavigationControl } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import hydroLightStyle from "@/styles/hydro-light.json";
-import hydroDarkStyle from "@/styles/hydro-dark.json";
 import onxTopoLightStyle from "@/styles/onx-topo-light.json";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
@@ -21,37 +19,13 @@ const BASEMAP_STYLES: BasemapStyle[] = [
     id: "onx-topo-light",
     name: "onX Topo Light",
     icon: "🏔️",
-    style: onxTopoLightStyle, // onX-style with contours in feet
-  },
-  {
-    id: "hydro-light",
-    name: "Hydro Light",
-    icon: "💧",
-    style: hydroLightStyle,
-  },
-  {
-    id: "hydro-dark",
-    name: "Hydro Dark",
-    icon: "🌊",
-    style: hydroDarkStyle, // Nighttime style with glowing water
-  },
-  {
-    id: "topo-light",
-    name: "Topo Light",
-    icon: "🗺️",
-    style: "mapbox://styles/mapbox/outdoors-v12",
+    style: onxTopoLightStyle,
   },
   {
     id: "topo-dark",
     name: "Topo Dark",
     icon: "🌑",
     style: "mapbox://styles/mapbox/dark-v11",
-  },
-  {
-    id: "satellite",
-    name: "Satellite",
-    icon: "🛰️",
-    style: "mapbox://styles/mapbox/satellite-streets-v12",
   },
 ];
 
