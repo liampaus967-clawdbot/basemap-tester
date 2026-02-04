@@ -532,10 +532,12 @@
       "minzoom": 10,
       "filter": ["match", ["get", "type"], ["village", "hamlet", "suburb", "neighbourhood"], true, false],
       "layout": {
-        "text-field": ["step", ["zoom"], ["concat", "○", ["get", "name"]], 12, ["get", "name"]],
+        "text-field": ["step", ["zoom"], ["concat", "○\n", ["get", "name"]], 12, ["get", "name"]],
         "text-font": ["DIN Pro Regular", "Arial Unicode MS Regular"],
         "text-size": ["interpolate", ["linear"], ["zoom"], 10, 11, 16, 14],
-        "text-max-width": 8
+        "text-max-width": 8,
+        "text-anchor": "top",
+        "text-justify": "center"
       },
       "paint": {
         "text-color": "#5a5450",
@@ -551,10 +553,12 @@
       "minzoom": 7,
       "filter": ["==", ["get", "type"], "town"],
       "layout": {
-        "text-field": ["step", ["zoom"], ["concat", "○", ["get", "name"]], 11, ["get", "name"]],
+        "text-field": ["step", ["zoom"], ["concat", "○\n", ["get", "name"]], 11, ["get", "name"]],
         "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
         "text-size": ["interpolate", ["linear"], ["zoom"], 7, 11, 14, 15],
-        "text-max-width": 8
+        "text-max-width": 8,
+        "text-anchor": "top",
+        "text-justify": "center"
       },
       "paint": {
         "text-color": "#4a4640",
