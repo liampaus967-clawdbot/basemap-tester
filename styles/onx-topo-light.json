@@ -502,19 +502,30 @@
       "type": "symbol",
       "source": "composite",
       "source-layer": "poi_label",
-      "filter": ["==", ["get", "class"], "landmark"],
+      "minzoom": 9,
+      "filter": ["all",
+        ["==", ["get", "class"], "landmark"],
+        ["has", "elevation"]
+      ],
       "layout": {
         "icon-image": "mountain",
+        "icon-size": ["interpolate", ["linear"], ["zoom"], 9, 0.6, 14, 0.9],
+        "icon-allow-overlap": false,
         "text-field": ["concat", ["get", "name"], "\n", ["to-string", ["round", ["*", ["get", "elevation"], 3.28084]]], " ft"],
         "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
-        "text-size": 11,
-        "text-offset": [0, 1.2],
-        "text-anchor": "top"
+        "text-size": ["interpolate", ["linear"], ["zoom"], 9, 9, 14, 11],
+        "text-offset": [0, 0.8],
+        "text-anchor": "top",
+        "text-optional": true,
+        "text-padding": 8,
+        "symbol-sort-key": ["*", -1, ["coalesce", ["get", "elevation"], 0]],
+        "symbol-spacing": 250
       },
       "paint": {
         "text-color": "#5a5248",
         "text-halo-color": "rgba(232, 228, 220, 0.9)",
-        "text-halo-width": 1.5
+        "text-halo-width": 1.5,
+        "text-opacity": ["interpolate", ["linear"], ["zoom"], 9, 0, 10, 0.8, 12, 1]
       }
     },
     {
