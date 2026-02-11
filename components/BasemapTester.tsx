@@ -1,10 +1,49 @@
 import React, { useState, useCallback } from "react";
-import Map, { NavigationControl } from "react-map-gl";
+import Map, { NavigationControl, Source, Layer } from "react-map-gl";
+import type { LineLayer, SymbolLayer } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import onwaterTopoLightStyle from "@/styles/onwater-topo-light.json";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
+
+// Rivers layer styles
+const riversLayer: LineLayer = {
+  id: "rivers-onwater",
+  type: "line",
+  source: "rivers",
+  "source-layer": "testRiversSet-cr53z3",
+  layout: {
+    "line-cap": "round",
+    "line-join": "round",
+  },
+  paint: {
+    "line-color": "#5a9fc7",
+    "line-width": ["interpolate", ["linear"], ["zoom"], 6, 0.5, 10, 1.5, 14, 3],
+    "line-opacity": 0.9,
+  },
+};
+
+const riversLabelLayer: SymbolLayer = {
+  id: "rivers-onwater-label",
+  type: "symbol",
+  source: "rivers",
+  "source-layer": "testRiversSet-cr53z3",
+  minzoom: 10,
+  layout: {
+    "text-field": ["get", "gnis_name"],
+    "text-font": ["DIN Pro Italic", "Arial Unicode MS Regular"],
+    "text-size": ["interpolate", ["linear"], ["zoom"], 10, 10, 14, 13],
+    "symbol-placement": "line",
+    "text-max-angle": 30,
+    "text-padding": 10,
+  },
+  paint: {
+    "text-color": "#3a7ca5",
+    "text-halo-color": "rgba(255, 255, 255, 0.9)",
+    "text-halo-width": 1.5,
+  },
+};
 
 // Basemap style definitions
 interface BasemapStyle {
@@ -100,6 +139,16 @@ const BasemapTester: React.FC = () => {
         onLoad={onMapLoad}
       >
         <NavigationControl position="top-right" />
+        
+        {/* Rivers Layer */}
+        <Source
+          id="rivers"
+          type="vector"
+          url="mapbox://lman967.d0g758s3"
+        >
+          <Layer {...riversLayer} />
+          <Layer {...riversLabelLayer} />
+        </Source>
       </Map>
 
       {/* Basemap Switcher Panel */}
