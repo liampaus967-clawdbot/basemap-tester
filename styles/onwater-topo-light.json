@@ -668,17 +668,16 @@
       "type": "symbol",
       "source": "composite",
       "source-layer": "natural_label",
-      "minzoom": 3,
-      "maxzoom": 14,
+      "minzoom": 12,
       "filter": ["==", ["get", "class"], "landform"],
       "layout": {
         "text-field": ["get", "name"],
         "text-font": ["DIN Pro Italic", "Arial Unicode MS Regular"],
         "text-size": [
           "interpolate", ["linear"], ["zoom"],
-          3, ["match", ["get", "sizerank"], 0, 14, 1, 12, 2, 11, 10],
-          6, ["match", ["get", "sizerank"], 0, 18, 1, 16, 2, 14, 20],
-          12, ["match", ["get", "sizerank"], 0, 22, 1, 18, 2, 16, 14]
+          12, ["match", ["get", "sizerank"], 0, 14, 1, 12, 2, 11, 10],
+          14, ["match", ["get", "sizerank"], 0, 18, 1, 16, 2, 14, 12],
+          16, ["match", ["get", "sizerank"], 0, 22, 1, 18, 2, 16, 14]
         ],
         "text-transform": "uppercase",
         "text-letter-spacing": 0.15,
@@ -686,10 +685,10 @@
         "symbol-sort-key": ["get", "sizerank"]
       },
       "paint": {
-        "text-color": "black",
-        "text-halo-color": "rgba(232, 228, 220, 0.8)",
+        "text-color": "#5a5248",
+        "text-halo-color": "rgba(232, 228, 220, 0.9)",
         "text-halo-width": 1.5,
-        "text-opacity": ["interpolate", ["linear"], ["zoom"], 3, 0.7, 10, 0.9, 11, 1, 14, 0]
+        "text-opacity": ["interpolate", ["linear"], ["zoom"], 12, 0, 14, 1]
       }
     },
     {
