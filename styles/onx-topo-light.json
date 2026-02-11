@@ -107,6 +107,17 @@
       }
     },
     {
+      "id": "landcover-snow",
+      "type": "fill",
+      "source": "composite",
+      "source-layer": "landcover",
+      "filter": ["==", ["get", "class"], "snow"],
+      "paint": {
+        "fill-color": "#ffffff",
+        "fill-opacity": 0.85
+      }
+    },
+    {
       "id": "national-park-fill",
       "type": "fill",
       "source": "composite",
