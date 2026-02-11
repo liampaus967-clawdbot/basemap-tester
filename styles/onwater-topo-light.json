@@ -261,7 +261,7 @@
       "source-layer": "testRiversSet-cr53z3",
       "minzoom": 10,
       "layout": {
-        "text-field": ["get", "name"],
+        "text-field": ["get", "gnis_name"],
         "text-font": ["DIN Pro Italic", "Arial Unicode MS Regular"],
         "text-size": ["interpolate", ["linear"], ["zoom"], 10, 10, 14, 13],
         "symbol-placement": "line",
