@@ -563,7 +563,7 @@
       "type": "symbol",
       "source": "composite",
       "source-layer": "place_label",
-      "minzoom": 10,
+      "minzoom": 11,
       "filter": ["match", ["get", "type"], ["village", "hamlet", "suburb", "neighbourhood"], true, false],
       "layout": {
         "text-field": ["step", ["zoom"], ["concat", ["get", "name"], "\n○"], 13, ["get", "name"]],
@@ -584,7 +584,7 @@
       "type": "symbol",
       "source": "composite",
       "source-layer": "place_label",
-      "minzoom": 8,
+      "minzoom": 10,
       "filter": ["==", ["get", "type"], "town"],
       "layout": {
         "text-field": ["step", ["zoom"], ["concat", ["get", "name"], "\n○"], 11, ["get", "name"]],
@@ -626,7 +626,7 @@
       "type": "symbol",
       "source": "composite",
       "source-layer": "place_label",
-      "minzoom": 5,
+      "minzoom": 7,
       "filter": ["all", ["==", ["get", "type"], "city"], ["!=", ["get", "capital"], 2], ["<", ["get", "symbolrank"], 13]],
       "layout": {
         "text-field": ["step", ["zoom"], ["concat", ["get", "name"], "\n○"], 10, ["get", "name"]],
