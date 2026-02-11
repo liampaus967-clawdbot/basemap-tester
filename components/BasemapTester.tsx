@@ -45,46 +45,49 @@ const BasemapTester: React.FC = () => {
   // Enable 3D terrain and hillshade when map loads
   const onMapLoad = useCallback((event: { target: any }) => {
     const map = event.target;
-    
+
     // Add terrain source if not already present
-    if (!map.getSource('mapbox-dem')) {
-      map.addSource('mapbox-dem', {
-        type: 'raster-dem',
-        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+    if (!map.getSource("mapbox-dem")) {
+      map.addSource("mapbox-dem", {
+        type: "raster-dem",
+        url: "mapbox://mapbox.mapbox-terrain-dem-v1",
         tileSize: 512,
-        maxzoom: 14
+        maxzoom: 14,
       });
     }
-    
+
     // Add hillshade layer if not already present
-    if (!map.getLayer('hillshade')) {
+    if (!map.getLayer("hillshade")) {
       // Find a good insertion point - before labels/symbols if possible
       const layers = map.getStyle().layers;
       let insertBefore: string | undefined;
       for (const layer of layers) {
-        if (layer.type === 'symbol' || layer.id.includes('label')) {
+        if (layer.type === "symbol" || layer.id.includes("label")) {
           insertBefore = layer.id;
           break;
         }
       }
-      
-      map.addLayer({
-        id: 'hillshade',
-        type: 'hillshade',
-        source: 'mapbox-dem',
-        paint: {
-          'hillshade-illumination-direction': 315,
-          'hillshade-illumination-anchor': 'viewport',
-          'hillshade-exaggeration': 0.5,
-          'hillshade-shadow-color': '#000000',
-          'hillshade-highlight-color': '#ffffff',
-          'hillshade-accent-color': '#000000',
-        }
-      }, insertBefore);
+
+      map.addLayer(
+        {
+          id: "hillshade",
+          type: "hillshade",
+          source: "mapbox-dem",
+          paint: {
+            "hillshade-illumination-direction": 315,
+            "hillshade-illumination-anchor": "viewport",
+            "hillshade-exaggeration": 0.25,
+            "hillshade-shadow-color": "#4a4a4a",
+            "hillshade-highlight-color": "#e8e8e8",
+            "hillshade-accent-color": "#6a6a6a",
+          },
+        },
+        insertBefore,
+      );
     }
-    
+
     // Enable 3D terrain
-    map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
+    map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
   }, []);
 
   return (
@@ -102,7 +105,7 @@ const BasemapTester: React.FC = () => {
       {/* Basemap Switcher Panel */}
       <div className="basemap-panel">
         <div className="panel-title">Basemap Style</div>
-        
+
         <div className="basemap-grid">
           {BASEMAP_STYLES.map((style) => (
             <button
@@ -112,7 +115,9 @@ const BasemapTester: React.FC = () => {
             >
               <span className="basemap-icon">{style.icon}</span>
               <span className="basemap-label">{style.name}</span>
-              {activeStyleId === style.id && <span className="active-indicator" />}
+              {activeStyleId === style.id && (
+                <span className="active-indicator" />
+              )}
             </button>
           ))}
         </div>
@@ -120,7 +125,11 @@ const BasemapTester: React.FC = () => {
         {/* Current Style Info */}
         <div className="style-info">
           <span>Current Style:</span>
-          <code>{typeof activeStyle?.style === 'string' ? activeStyle.style : 'Local JSON (hydro-light.json)'}</code>
+          <code>
+            {typeof activeStyle?.style === "string"
+              ? activeStyle.style
+              : "Local JSON (hydro-light.json)"}
+          </code>
         </div>
       </div>
     </div>
