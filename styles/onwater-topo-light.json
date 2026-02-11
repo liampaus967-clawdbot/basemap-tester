@@ -1,8 +1,8 @@
 {
   "version": 8,
-  "name": "onX Topo Light",
+  "name": "onWater Topo Light",
   "metadata": {
-    "description": "onX-style topo basemap with contours in feet, public lands, and terrain"
+    "description": "onWater topo basemap with contours in feet, public lands, and terrain"
   },
   "sources": {
     "composite": {
