@@ -19,7 +19,7 @@ const riversLayer: LineLayer = {
   },
   paint: {
     "line-color": "#5a9fc7",
-    "line-width": ["interpolate", ["linear"], ["zoom"], 6, 0.5, 10, 1.5, 14, 3],
+    "line-width": ["interpolate", ["linear"], ["zoom"], 9, 0, 10, 1.5, 14, 3],
     "line-opacity": 0.9,
   },
 };
@@ -29,19 +29,19 @@ const riversLabelLayer: SymbolLayer = {
   type: "symbol",
   source: "rivers",
   "source-layer": "testRiversSet-cr53z3",
-  minzoom: 10,
+  minzoom: 8,
   layout: {
     "text-field": ["get", "gnis_name"],
-    "text-font": ["DIN Pro Italic", "Arial Unicode MS Regular"],
-    "text-size": ["interpolate", ["linear"], ["zoom"], 10, 10, 14, 13],
+    "text-font": ["DIN Pro Bold Italic", "Arial Unicode MS Bold"],
+    "text-size": ["interpolate", ["linear"], ["zoom"], 10, 13, 14, 15],
     "symbol-placement": "line",
     "text-max-angle": 30,
     "text-padding": 10,
   },
   paint: {
-    "text-color": "#3a7ca5",
+    "text-color": "#2c5973",
     "text-halo-color": "rgba(255, 255, 255, 0.9)",
-    "text-halo-width": 1.5,
+    "text-halo-width": 1,
   },
 };
 
