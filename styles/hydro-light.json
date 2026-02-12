@@ -18,7 +18,7 @@
   },
   "terrain": {
     "source": "mapbox-dem",
-    "exaggeration": 1.0
+    "exaggeration": 1.25
   },
   "sprite": "mapbox://sprites/mapbox/outdoors-v12",
   "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
@@ -123,11 +123,12 @@
       "type": "hillshade",
       "source": "mapbox-dem",
       "paint": {
-        "hillshade-illumination-direction": 315,
-        "hillshade-exaggeration": 0.25,
-        "hillshade-shadow-color": "#7a8a7a",
-        "hillshade-highlight-color": "#fafafa",
-        "hillshade-accent-color": "#8a9a8a"
+        "hillshade-illumination-direction": 335,
+        "hillshade-illumination-anchor": "viewport",
+        "hillshade-exaggeration": 0.7,
+        "hillshade-shadow-color": "#1a2e1a",
+        "hillshade-highlight-color": "#d4e8d4",
+        "hillshade-accent-color": "#2d4a2d"
       }
     },
     {
