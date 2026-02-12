@@ -8,17 +8,7 @@
     "composite": {
       "url": "mapbox://mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2",
       "type": "vector"
-    },
-    "mapbox-dem": {
-      "type": "raster-dem",
-      "url": "mapbox://mapbox.mapbox-terrain-dem-v1",
-      "tileSize": 512,
-      "maxzoom": 14
     }
-  },
-  "terrain": {
-    "source": "mapbox-dem",
-    "exaggeration": 1.5
   },
   "sprite": "mapbox://sprites/mapbox/outdoors-v12",
   "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
@@ -120,14 +110,28 @@
     },
     {
       "id": "hillshade",
-      "type": "hillshade",
-      "source": "mapbox-dem",
+      "type": "fill",
+      "source": "composite",
+      "source-layer": "hillshade",
       "paint": {
-        "hillshade-illumination-direction": 335,
-        "hillshade-exaggeration": 0.5,
-        "hillshade-shadow-color": "#3d4040",
-        "hillshade-highlight-color": "#ffffff",
-        "hillshade-accent-color": "#5a5a5a"
+        "fill-color": [
+          "match",
+          ["get", "class"],
+          "shadow", "#e8e5e0",
+          "highlight", "#ffffff",
+          "#f5f3ef"
+        ],
+        "fill-opacity": [
+          "match",
+          ["get", "level"],
+          94, 0.08,
+          90, 0.06,
+          89, 0.05,
+          78, 0.04,
+          67, 0.03,
+          56, 0.02,
+          0.01
+        ]
       }
     },
     {
