@@ -30,38 +30,7 @@
         "background-color": "#e8e4dc"
       }
     },
-    {
-      "id": "hillshade-shadow",
-      "type": "fill",
-      "source": "composite",
-      "source-layer": "hillshade",
-      "filter": ["==", ["get", "class"], "shadow"],
-      "paint": {
-        "fill-color": "#c8c4b8",
-        "fill-opacity": [
-          "interpolate", ["linear"], ["zoom"],
-          6, ["match", ["get", "level"], 94, 0.18, 90, 0.14, 89, 0.11, 78, 0.08, 67, 0.05, 0.03],
-          10, ["match", ["get", "level"], 94, 0.15, 90, 0.12, 89, 0.09, 78, 0.06, 67, 0.04, 0.02],
-          14, ["match", ["get", "level"], 94, 0.12, 90, 0.1, 89, 0.08, 78, 0.05, 67, 0.03, 0.02]
-        ]
-      }
-    },
-    {
-      "id": "hillshade-highlight",
-      "type": "fill",
-      "source": "composite",
-      "source-layer": "hillshade",
-      "filter": ["==", ["get", "class"], "highlight"],
-      "paint": {
-        "fill-color": "#ffffff",
-        "fill-opacity": [
-          "interpolate", ["linear"], ["zoom"],
-          6, ["match", ["get", "level"], 94, 0.15, 90, 0.1, 0.05],
-          10, ["match", ["get", "level"], 94, 0.12, 90, 0.08, 0.04],
-          14, ["match", ["get", "level"], 94, 0.1, 90, 0.06, 0.03]
-        ]
-      }
-    },
+   
     {
       "id": "landcover-grass",
       "type": "fill",
@@ -734,6 +703,40 @@
         "text-opacity": ["interpolate", ["linear"], ["zoom"], 5.5, 1, 7.5, 0.6, 8, 0]
       }
     },
+
+    {
+      "id": "hillshade-shadow",
+      "type": "fill",
+      "source": "composite",
+      "source-layer": "hillshade",
+      "filter": ["==", ["get", "class"], "shadow"],
+      "paint": {
+        "fill-color": ["interpolate", ["linear"], ["zoom"], 6, "#c8c4b8", 10, "#c8c4b8", 10.5, "#5a5650", 14, "#5a5650"],
+        "fill-opacity": [
+          "interpolate", ["linear"], ["zoom"],
+          6, ["match", ["get", "level"], 94, 0.65, 90, 0.5, 89, 0.4, 78, 0.3, 67, 0.2, 0.15],
+          10, ["match", ["get", "level"], 94, 0.55, 90, 0.42, 89, 0.34, 78, 0.24, 67, 0.16, 0.12],
+          14, ["match", ["get", "level"], 94, 0.45, 90, 0.36, 89, 0.3, 78, 0.22, 67, 0.14, 0.1]
+        ]
+      }
+    },
+    {
+      "id": "hillshade-highlight",
+      "type": "fill",
+      "source": "composite",
+      "source-layer": "hillshade",
+      "filter": ["==", ["get", "class"], "highlight"],
+      "paint": {
+        "fill-color": "#ffffff",
+        "fill-opacity": [
+          "interpolate", ["linear"], ["zoom"],
+          6, ["match", ["get", "level"], 94, 0.55, 90, 0.4, 0.2],
+          10, ["match", ["get", "level"], 94, 0.45, 90, 0.32, 0.16],
+          14, ["match", ["get", "level"], 94, 0.38, 90, 0.26, 0.13]
+        ]
+      }
+    },
+
     {
       "id": "country-label",
       "type": "symbol",
