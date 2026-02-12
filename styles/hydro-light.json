@@ -13,7 +13,7 @@
       "type": "raster-dem",
       "url": "mapbox://mapbox.mapbox-terrain-dem-v1",
       "tileSize": 512,
-      "maxzoom": 14
+      "maxzoom": 22
     }
   },
   "terrain": {
@@ -122,14 +122,10 @@
       "id": "hillshade",
       "type": "hillshade",
       "source": "mapbox-dem",
-      "paint": {
-        "hillshade-illumination-direction": 335,
-        "hillshade-illumination-anchor": "viewport",
-        "hillshade-exaggeration": 0.7,
-        "hillshade-shadow-color": "#1a2e1a",
-        "hillshade-highlight-color": "#d4e8d4",
-        "hillshade-accent-color": "#2d4a2d"
-      }
+      "minzoom": 0,
+      "maxzoom": 22,
+      "paint": {},
+      "layout": {}
     },
     {
       "id": "contour-line",
