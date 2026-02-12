@@ -4,7 +4,6 @@ import type { LineLayer, SymbolLayer } from "react-map-gl";
 import type { MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import onwaterTopoLightStyle from "@/styles/onwater-topo-light.json";
-import hydroLightStyle from "@/styles/hydro-light.json";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
 
@@ -56,15 +55,9 @@ interface BasemapStyle {
 
 const BASEMAP_STYLES: BasemapStyle[] = [
   {
-    id: "hydro-light",
+    id: "onwater-topo-light",
     name: "onWater Topo Light",
     icon: "🏔️",
-    style: hydroLightStyle,
-  },
-  {
-    id: "onwater-topo-light",
-    name: "onWater Topo (Alt)",
-    icon: "🗺️",
     style: onwaterTopoLightStyle,
   },
   {
@@ -84,12 +77,14 @@ const BasemapTester: React.FC = () => {
     bearing: -10,
   });
 
-  const [activeStyleId, setActiveStyleId] = useState<string>("hydro-light");
+  const [activeStyleId, setActiveStyleId] = useState<string>("onwater-topo-light");
 
   const activeStyle = BASEMAP_STYLES.find((s) => s.id === activeStyleId);
 
-  // Setup 3D terrain and hillshade
-  const setupTerrain = useCallback((map: any) => {
+  // Enable 3D terrain and hillshade when map loads
+  const onMapLoad = useCallback((event: { target: any }) => {
+    const map = event.target;
+
     // Add terrain source if not already present
     if (!map.getSource("mapbox-dem")) {
       map.addSource("mapbox-dem", {
@@ -101,7 +96,7 @@ const BasemapTester: React.FC = () => {
     }
 
     // Add hillshade layer if not already present
-    if (!map.getLayer("hillshade-terrain")) {
+    if (!map.getLayer("hillshade")) {
       // Find a good insertion point - before labels/symbols if possible
       const layers = map.getStyle().layers;
       let insertBefore: string | undefined;
@@ -114,16 +109,16 @@ const BasemapTester: React.FC = () => {
 
       map.addLayer(
         {
-          id: "hillshade-terrain",
+          id: "hillshade",
           type: "hillshade",
           source: "mapbox-dem",
           paint: {
-            "hillshade-illumination-direction": 335,
+            "hillshade-illumination-direction": 315,
             "hillshade-illumination-anchor": "viewport",
-            "hillshade-exaggeration": 0.5,
-            "hillshade-shadow-color": "#3d4040",
-            "hillshade-highlight-color": "#ffffff",
-            "hillshade-accent-color": "#5a5a5a",
+            "hillshade-exaggeration": 0.25,
+            "hillshade-shadow-color": "#4a4a4a",
+            "hillshade-highlight-color": "#e8e8e8",
+            "hillshade-accent-color": "#6a6a6a",
           },
         },
         insertBefore,
@@ -134,20 +129,6 @@ const BasemapTester: React.FC = () => {
     map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
   }, []);
 
-  // Enable 3D terrain and hillshade when map loads
-  const onMapLoad = useCallback((event: { target: any }) => {
-    setupTerrain(event.target);
-  }, [setupTerrain]);
-
-  // Re-apply terrain when style changes
-  const onStyleData = useCallback((event: { target: any }) => {
-    const map = event.target;
-    // Wait for style to be fully loaded before adding terrain
-    if (map.isStyleLoaded()) {
-      setupTerrain(map);
-    }
-  }, [setupTerrain]);
-
   return (
     <div style={{ position: "relative", width: "100%", height: "100vh" }}>
       <Map
@@ -156,7 +137,6 @@ const BasemapTester: React.FC = () => {
         mapStyle={activeStyle?.style as any}
         mapboxAccessToken={MAPBOX_TOKEN}
         onLoad={onMapLoad}
-        onStyleData={onStyleData}
       >
         <NavigationControl position="top-right" />
         
@@ -197,7 +177,7 @@ const BasemapTester: React.FC = () => {
           <code>
             {typeof activeStyle?.style === "string"
               ? activeStyle.style
-              : `Local JSON (${activeStyleId}.json)`}
+              : "Local JSON (hydro-light.json)"}
           </code>
         </div>
       </div>
