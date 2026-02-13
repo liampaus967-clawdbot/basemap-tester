@@ -82,9 +82,9 @@ const BasemapTester: React.FC = () => {
 
   const activeStyle = BASEMAP_STYLES.find((s) => s.id === activeStyleId);
 
-  // Enable 3D terrain and hillshade when map loads
-  const onMapLoad = useCallback((event: { target: any }) => {
-    const map = event.target;
+  // Setup terrain and hillshade on a map instance
+  const setupTerrain = useCallback((map: any) => {
+    if (!map.isStyleLoaded()) return;
 
     // Add terrain source if not already present
     if (!map.getSource("mapbox-dem")) {
@@ -140,6 +140,19 @@ const BasemapTester: React.FC = () => {
     map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
   }, []);
 
+  // Enable 3D terrain and hillshade when map loads
+  const onMapLoad = useCallback((event: { target: any }) => {
+    setupTerrain(event.target);
+  }, [setupTerrain]);
+
+  // Re-apply terrain when style changes
+  const onStyleData = useCallback((event: { target: any }) => {
+    // Small delay to ensure style is fully loaded
+    setTimeout(() => {
+      setupTerrain(event.target);
+    }, 100);
+  }, [setupTerrain]);
+
   return (
     <div style={{ position: "relative", width: "100%", height: "100vh" }}>
       <Map
@@ -149,6 +162,7 @@ const BasemapTester: React.FC = () => {
         mapboxAccessToken={MAPBOX_TOKEN}
         projection={{ name: "globe" }}
         onLoad={onMapLoad}
+        onStyleData={onStyleData}
       >
         <NavigationControl position="top-right" />
 
