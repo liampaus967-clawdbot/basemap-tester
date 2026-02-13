@@ -1,7 +1,6 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import Map, { NavigationControl, Source, Layer } from "react-map-gl";
-import type { LineLayer, SymbolLayer } from "react-map-gl";
-import type { MapRef } from "react-map-gl";
+import type { LineLayer, SymbolLayer, MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import onwaterTopoLightStyle from "@/styles/onwater-topo-light.json";
 
@@ -79,6 +78,7 @@ const BasemapTester: React.FC = () => {
 
   const [activeStyleId, setActiveStyleId] =
     useState<string>("onwater-topo-light");
+  const mapRef = useRef<MapRef>(null);
 
   const activeStyle = BASEMAP_STYLES.find((s) => s.id === activeStyleId);
 
@@ -149,19 +149,20 @@ const BasemapTester: React.FC = () => {
   );
 
   // Re-apply terrain when style changes
-  const onStyleData = useCallback(
-    (event: { target: any }) => {
-      // Small delay to ensure style is fully loaded
-      setTimeout(() => {
-        setupTerrain(event.target);
-      }, 100);
-    },
-    [setupTerrain],
-  );
+  const onStyleData = useCallback(() => {
+    // Small delay to ensure style is fully loaded
+    setTimeout(() => {
+      const map = mapRef.current?.getMap();
+      if (map) {
+        setupTerrain(map);
+      }
+    }, 100);
+  }, [setupTerrain]);
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100vh" }}>
       <Map
+        ref={mapRef}
         initialViewState={viewport}
         style={{ width: "100%", height: "100vh" }}
         mapStyle={activeStyle?.style as any}
