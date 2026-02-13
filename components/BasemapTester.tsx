@@ -66,6 +66,12 @@ const BASEMAP_STYLES: BasemapStyle[] = [
     icon: "🌑",
     style: "mapbox://styles/mapbox/dark-v11",
   },
+  {
+    id: "erins-basemap",
+    name: "Erins Basemap",
+    icon: "🗺️",
+    style: "mapbox://styles/erinonwater/cml8n6urc005001sqcymq79wv",
+  },
 ];
 
 const BasemapTester: React.FC = () => {
@@ -95,6 +101,16 @@ const BasemapTester: React.FC = () => {
       });
     }
 
+    // Add separate DEM source for hillshade layer (for full resolution)
+    if (!map.getSource("mapbox-dem-hillshade")) {
+      map.addSource("mapbox-dem-hillshade", {
+        type: "raster-dem",
+        url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+        tileSize: 512,
+        maxzoom: 14,
+      });
+    }
+
     // Add hillshade layer if not already present
     if (!map.getLayer("hillshade")) {
       // Find a good insertion point - before labels/symbols if possible
@@ -111,7 +127,7 @@ const BasemapTester: React.FC = () => {
         {
           id: "hillshade",
           type: "hillshade",
-          source: "mapbox-dem",
+          source: "mapbox-dem-hillshade",
           paint: {
             "hillshade-illumination-direction": 315,
             "hillshade-illumination-anchor": "viewport",
@@ -136,6 +152,7 @@ const BasemapTester: React.FC = () => {
         style={{ width: "100%", height: "100vh" }}
         mapStyle={activeStyle?.style as any}
         mapboxAccessToken={MAPBOX_TOKEN}
+        projection="globe"
         onLoad={onMapLoad}
       >
         <NavigationControl position="top-right" />
