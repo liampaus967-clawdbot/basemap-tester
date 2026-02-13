@@ -126,10 +126,10 @@ const BasemapTester: React.FC = () => {
           paint: {
             "hillshade-illumination-direction": 315,
             "hillshade-illumination-anchor": "viewport",
-            "hillshade-exaggeration": 0.25,
-            "hillshade-shadow-color": "#4a4a4a",
-            "hillshade-highlight-color": "#e8e8e8",
-            "hillshade-accent-color": "#6a6a6a",
+            "hillshade-exaggeration": 0.6,
+            "hillshade-shadow-color": "#2a3a2a",
+            "hillshade-highlight-color": "#ffffff",
+            "hillshade-accent-color": "#3a4a3a",
           },
         },
         insertBefore,
@@ -137,7 +137,7 @@ const BasemapTester: React.FC = () => {
     }
 
     // Enable 3D terrain
-    map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
+    map.setTerrain({ source: "mapbox-dem", exaggeration: 1.75 });
   }, []);
 
   // Enable 3D terrain and hillshade when map loads
