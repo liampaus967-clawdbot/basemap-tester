@@ -126,7 +126,7 @@ const BasemapTester: React.FC = () => {
           paint: {
             "hillshade-illumination-direction": 315,
             "hillshade-illumination-anchor": "viewport",
-            "hillshade-exaggeration": 0.6,
+            "hillshade-exaggeration": 0.9,
             "hillshade-shadow-color": "#2a3a2a",
             "hillshade-highlight-color": "#ffffff",
             "hillshade-accent-color": "#3a4a3a",
@@ -141,17 +141,23 @@ const BasemapTester: React.FC = () => {
   }, []);
 
   // Enable 3D terrain and hillshade when map loads
-  const onMapLoad = useCallback((event: { target: any }) => {
-    setupTerrain(event.target);
-  }, [setupTerrain]);
+  const onMapLoad = useCallback(
+    (event: { target: any }) => {
+      setupTerrain(event.target);
+    },
+    [setupTerrain],
+  );
 
   // Re-apply terrain when style changes
-  const onStyleData = useCallback((event: { target: any }) => {
-    // Small delay to ensure style is fully loaded
-    setTimeout(() => {
-      setupTerrain(event.target);
-    }, 100);
-  }, [setupTerrain]);
+  const onStyleData = useCallback(
+    (event: { target: any }) => {
+      // Small delay to ensure style is fully loaded
+      setTimeout(() => {
+        setupTerrain(event.target);
+      }, 100);
+    },
+    [setupTerrain],
+  );
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100vh" }}>
