@@ -147,7 +147,7 @@ const BasemapTester: React.FC = () => {
         style={{ width: "100%", height: "100vh" }}
         mapStyle={activeStyle?.style as any}
         mapboxAccessToken={MAPBOX_TOKEN}
-        projection="globe"
+        projection={{ name: "globe" }}
         onLoad={onMapLoad}
       >
         <NavigationControl position="top-right" />
