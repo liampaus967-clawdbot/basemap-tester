@@ -61,14 +61,8 @@ const BASEMAP_STYLES: BasemapStyle[] = [
     style: onwaterTopoLightStyle,
   },
   {
-    id: "topo-dark",
-    name: "Topo Dark",
-    icon: "🌑",
-    style: "mapbox://styles/mapbox/dark-v11",
-  },
-  {
     id: "erins-basemap",
-    name: "Erins Basemap",
+    name: "Dark Basemap",
     icon: "🗺️",
     style: "mapbox://styles/erinonwater/cml8n6urc005001sqcymq79wv",
   },
@@ -83,7 +77,8 @@ const BasemapTester: React.FC = () => {
     bearing: -10,
   });
 
-  const [activeStyleId, setActiveStyleId] = useState<string>("onwater-topo-light");
+  const [activeStyleId, setActiveStyleId] =
+    useState<string>("onwater-topo-light");
 
   const activeStyle = BASEMAP_STYLES.find((s) => s.id === activeStyleId);
 
@@ -156,13 +151,9 @@ const BasemapTester: React.FC = () => {
         onLoad={onMapLoad}
       >
         <NavigationControl position="top-right" />
-        
+
         {/* Rivers Layer */}
-        <Source
-          id="rivers"
-          type="vector"
-          url="mapbox://lman967.d0g758s3"
-        >
+        <Source id="rivers" type="vector" url="mapbox://lman967.d0g758s3">
           <Layer {...riversLayer} />
           <Layer {...riversLabelLayer} />
         </Source>
