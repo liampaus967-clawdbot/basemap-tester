@@ -43,19 +43,6 @@
       }
     },
     {
-      "id": "hillshade",
-      "type": "hillshade",
-      "source": "mapbox-dem-hillshade",
-      "paint": {
-        "hillshade-illumination-direction": 315,
-        "hillshade-illumination-anchor": "viewport",
-        "hillshade-exaggeration": 0.9,
-        "hillshade-shadow-color": "#2a3a2a",
-        "hillshade-highlight-color": "#ffffff",
-        "hillshade-accent-color": "#3a4a3a"
-      }
-    },
-    {
       "id": "landcover-grass",
       "type": "fill",
       "source": "composite",
@@ -307,6 +294,19 @@
         "line-color": "#0391E3",
         "line-width": ["interpolate", ["linear"], ["zoom"], 6, 0, 8, 0.5, 14, 1],
         "line-opacity": 0.8
+      }
+    },
+    {
+      "id": "hillshade",
+      "type": "hillshade",
+      "source": "mapbox-dem-hillshade",
+      "paint": {
+        "hillshade-illumination-direction": 315,
+        "hillshade-illumination-anchor": "viewport",
+        "hillshade-exaggeration": 0.9,
+        "hillshade-shadow-color": "#2a3a2a",
+        "hillshade-highlight-color": "#ffffff",
+        "hillshade-accent-color": "#3a4a3a"
       }
     },
     {
